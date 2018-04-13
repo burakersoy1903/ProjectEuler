@@ -4,7 +4,7 @@
 # The sum of these multiples is 23.
 # Find the sum of all the multiples of 3 or 5 below 1000.
 
-# My favorite: Approach 3
+# My favorite: Approach 3, Approach 4, and Approach 7
 
 # ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 # Approach 1
@@ -39,8 +39,8 @@ rm(list = setdiff(ls(), lsf.str()))
 # that are less than 1000.
 x.2 <- 0
 for (i in 1:333){x.2[i] <- i*3}
-head(x.2) 
 # head shows the first few rows of the object
+head(x.2) 
 # For multiples of 5, we take numbers till 199 and the last multiple of 5 below 1000 comes to be 995
 y.2 <- 0
 for (j in 1:199){y.2[j] <- j*5}
@@ -101,7 +101,11 @@ rm(list = setdiff(ls(), lsf.str()))
 # ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 # Approach 5
 
+# Create variable, Loop through 1 to 999, and 
+# Sum values that are multiples of either 3 or 5 but not both due to or (|)
+# in one single line of code. WOW-R!
 answer <- sum((1:999)[((1:999) %% 3 == 0) | ((1:999) %% 5 == 0)])
+# Let's print it
 print(answer)
 
 # Remove all objects except for functions
@@ -110,7 +114,12 @@ rm(list = setdiff(ls(), lsf.str()))
 # ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 # Approach 6
 
+# Create variable, Loop through 1 to 999, and 
+# Sum values that are multiples of either 3 or 5 but not both due to or (|)
+# in one single line of code.
+# Let's use some different R data stuructures and functions instead of math skills. Fancy!
 answer <- sum(unique(c(seq(3, 999, 3), seq(5, 999, 5))))
+# Let's print it
 print(answer)
 
 # Remove all objects except for functions
@@ -119,13 +128,21 @@ rm(list = setdiff(ls(), lsf.str()))
 # ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 # Approach 7
 
+# I do not know why we are timing ourselves, but it is cool to see some time functions
 t <- proc.time()
+# Same solution from Approach 2
+# However, we wrote our own function instead of commands
 SumDivBy <- function(n, m) {
     p <- m %/% n * n # Round to multiple of n
     return (p * (1 + (p / n)) / 2)
 }
+# 15 is a common multiple of 3 and 5, and hence it will get included twice – once when we 
+# add the numbers that are multiples of 3 and once when we add numbers that are multiples 
+# of 5. So we need to subtract these 15 and its multiples.
 answer <- SumDivBy(3, 999) + SumDivBy(5, 999) - SumDivBy(15, 999)
+# Let's print it
 print(answer)
+# Stop timer :D
 print(proc.time()-t)
 
 # Remove all objects except for functions
@@ -134,7 +151,10 @@ rm(list = setdiff(ls(), lsf.str()))
 # ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 # Approach 8
 
+# I do not know why we are timing ourselves, but it is cool to see some time functions
 t <- proc.time()
+# Combined solution from Approach 4 and Approach 8
+# Fancy to see that we can assign funtion results to variables
 answer <- sum(sapply(1:999, function(x){
     if(x%%5 == 0) return(x)
     if(x%%3 == 0) return(x)
@@ -142,7 +162,9 @@ answer <- sum(sapply(1:999, function(x){
 }
 )
 )
+# Let's print it
 print(answer)
+# Stop timer :D
 print(proc.time()-t)
 
 # Remove all objects except for functions
